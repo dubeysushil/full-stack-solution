@@ -1,0 +1,30 @@
+{% extends "team_member_add/base.html" %}
+{%load crispy_forms_tags%}
+
+{% block content %}
+<h3 class="display-4">{{title}}</h3>
+<h6>{{subtitle}}</h6>
+<hr class="my-4">
+<h6>Info</h6>
+<form action="" method="post" autocomplete="off">
+    {%csrf_token%}
+    {{form|crispy}}
+    <div class="row">
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fas fa-database"></i> Save</button>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'team_member_list' %}" class="btn btn-secondary btn-block btn-lg">
+                <i class="fas fa-stream"></i> Back to list
+            </a>
+        </div>
+    </div>
+</form>
+<br/>
+<div>
+    <form action="{% url 'team_member_delete' id %}" method="post" class="d-inline">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-block btn-lg"><i class="far fa-trash-alt"></i> Delete</button>
+    </form>
+</div>
+{% endblock content %}

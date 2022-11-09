@@ -1,0 +1,49 @@
+{% extends "team_member_add/base.html" %}
+
+{% block content %}
+<style>
+    .avtarDesign{
+        font-size: 4rem;
+        color: darkgray;
+    }
+    .primaryP{
+        font-weight: 700;
+        color: black;
+    }
+    .secondaryP{
+        margin-top: -13px;
+        color: slategrey;
+        font-size: 15px;
+    }
+    .linkStyle{
+        text-decoration: none !important;
+    }
+</style>
+<a href="{% url 'team_member_insert' %}" class="btn btn-outline-success float-right">
+    <i class="fas fa-plus"></i> Add New
+</a>
+<h3 class="display-4">Team Members</h3>
+<h6>You have {{count}} team members</h6>
+<hr class="my-4">
+{% for member in team_member_list %}
+    <a href="{% url 'team_member_update' member.id %}" class="linkStyle">
+        <div class="row">
+            <div class="col-md-2">
+                <i class="fa fa-user-circle avtarDesign" aria-hidden="true"></i>
+            </div>
+            <div class="col-md-10">
+                <p class="primaryP">
+                    {{member.firstName}} {{member.lastName}}
+                    {% if member.role == 'Admin' %}
+                    (admin)
+                    {% endif %}
+                </p>
+                <p class="secondaryP">{{member.phoneNumber}}</p>
+                <p class="secondaryP">{{member.email}}</p>
+            </div>
+        </div>
+        <hr class="my-4">
+    </a>
+{% endfor %}
+
+{% endblock content %}
